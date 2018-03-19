@@ -16,6 +16,7 @@ var router = express.Router();
 router.use(function(req, res, next) {
     console.log('What did u do?');
     res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "DELETE");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
@@ -49,7 +50,7 @@ router.route('/heroes')
 router.route('/heroes/:hero_id')
 
     .get(function(req, res) {
-        Hero.findById(req.params.bear_id, function(err, hero) {
+        Hero.findById(req.params.hero_id, function(err, hero) {
             if (err)
                 res.send(err);
             res.json(hero);
