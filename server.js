@@ -2,7 +2,7 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var mongoose   = require('mongoose');
+var mongoose = require('mongoose');
 mongoose.connect('mongodb://127.0.0.1:27017');
 
 var Hero = require('./app/models/hero');
@@ -14,7 +14,7 @@ var port = process.env.port || 8080;
 var router = express.Router();
 
 router.use(function(req, res, next) {
-    console.log('Something is happening.');
+    console.log('What did u do?');
     next();
 });
 
@@ -23,14 +23,13 @@ router.get('/', function(req, res) {
 });
 
 router.route('/heroes')
-
     .post(function(req, res) {
-        var hero = new Hero();
-        hero.name = req.body.hero;
+        var hero = new Hero()
+        hero.name = req.body.name
         hero.save(function(err) {
             if (err)
-                res.send(err);
-            res.json({ message: 'Hero Added!' })
+                res.send(err)
+            res.json({ message: 'Hero Added!' });
         })
     })
 
@@ -39,7 +38,7 @@ router.route('/heroes')
             if (err)
                 res.send(err);
             res.json(heroes);
-        });
+        })
     });
 
 
@@ -63,10 +62,10 @@ router.route('/heroes/:hero_id')
             hero.save(function(err) {
                 if (err)
                     res.send(err);
-                res.json({ message: 'Hero updated!' });
-            });
-        });
-    });
+                res.json({ message: 'Hero updated!' })
+            })
+        })
+    })
     
     .delete(function(req, res) {
         Hero.remove({
@@ -79,7 +78,7 @@ router.route('/heroes/:hero_id')
     });
     
 
-app.use('/heroes', router);
+app.use('/list', router);
 
 app.listen(port);
 console.log('Tour of Heroes ' + port);
