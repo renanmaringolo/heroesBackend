@@ -78,7 +78,7 @@ router.route('/heroes/:hero_id')
     });
     
 
-app.use('/list', router);
+app.use('/api', router);
 
 app.listen(port);
 console.log('Tour of Heroes ' + port);
